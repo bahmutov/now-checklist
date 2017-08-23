@@ -17,7 +17,7 @@
   - [ ] rejected promises
   I recommend installing [crasher][crasher] route to test crash handling on demand by going
   to a "magic" endpoint `<service>/crash`
-* [ ] setup end to end tests that can work against `NOW_ULR` or default local dev url.
+* [ ] setup end to end tests that can work against `NOW_URL` or default local development url.
     ```js
     // spec.js
     const server = process.env.NOW_URL
@@ -30,7 +30,27 @@
       // assert returned version
     })
     ```
+* [ ] setup an [alias][alias], either to external domain or to sensible `<service name>.now.sh`.
+  If the service should be hidden, but "stable", I suggest generating random url as an alias,
+  for example `<service name-usjwy83ksyq.now.sh>` which allows other services to use stable URL.
 * [ ] setup continuous deployment if tests pass using [now-pipeline][now-pipeline].
+  You can set alias switch and pruning old deploys on success. Do not forget to create a new
+  Zeit [API token][api token] and set it on CI as `NOW_TOKEN` environment variable.
+* [ ] pass passwords, api keys, and other sensitive information via encoded environment
+  [secrets][env-and-secrets]. From command line define a secret.
+    ```
+    $ now secret add acme-api-key my-value-here
+    ```
+  Then map this secret to an environment variable name in `package.json` "now" section
+    ```json
+    {
+      "env": {
+        "MY_VARIABLE": "@acme-api-key"
+      }
+    }
+    ```
+* [ ] setup logging either by using a full features service, or with simple [now-logs][now-logs]
+  if you only interested in real time logging without history.
 
 ## Related
 
@@ -42,5 +62,9 @@
 
 [now-pipeline]: https://github.com/bahmutov/now-pipeline
 [immutable deploys]: https://www.cypress.io/blog/2017/05/30/cypress-and-immutable-deploys/
-[engines section]: https://docs.npmjs.com/files/package.json#engines
+[engines]: https://docs.npmjs.com/files/package.json#engines
 [crasher]: https://github.com/bahmutov/crasher
+[alias]: https://zeit.co/docs/features/aliases
+[api token]: https://zeit.co/account/tokens
+[env-and-secrets]: https://zeit.co/docs/features/env-and-secrets
+[now-logs]: https://github.com/berzniz/now-logs#readme
