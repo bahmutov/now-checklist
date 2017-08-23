@@ -44,8 +44,10 @@
   Then map this secret to an environment variable name in `package.json` "now" section
     ```json
     {
-      "env": {
-        "MY_VARIABLE": "@acme-api-key"
+      "now": {
+        "env": {
+          "MY_VARIABLE": "@acme-api-key"
+        }
       }
     }
     ```
