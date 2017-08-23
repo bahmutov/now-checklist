@@ -34,8 +34,9 @@
   If the service should be hidden, but "stable", I suggest generating random url as an alias,
   for example `<service name-usjwy83ksyq.now.sh>` which allows other services to use stable URL.
 * [ ] setup continuous deployment if tests pass using [now-pipeline][now-pipeline].
-  You can set alias switch and pruning old deploys on success. Do not forget to create a new
+  You can switch the alias and prune old deploys on test success. Do not forget to create a new
   Zeit [API token][api token] and set it on CI as `NOW_TOKEN` environment variable.
+  Also note, that an alias must be created manually the first time before switching from CI.
 * [ ] pass passwords, api keys, and other sensitive information via encoded environment
   [secrets][env-and-secrets]. From command line define a secret.
     ```
