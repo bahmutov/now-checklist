@@ -7,7 +7,7 @@
     ```json
     {
       "engines": {
-        "node": "8"
+        "node": "^8"
       }
     }
     ```
@@ -29,6 +29,17 @@
       const info = await got(toFullUrl('/version'), { json: true })
       // assert returned version
     })
+    ```
+* [ ] set `NODE_ENV` to `production` to avoid 
+  [installing dev dependencies](https://zeit.co/docs/deployment-types/node)
+    ```json
+    {
+      "now": {
+        "env": {
+          "NODE_ENV": "production"
+        }
+      }
+    }
     ```
 * [ ] setup an [alias][alias], either to external domain or to sensible `<service name>.now.sh`.
   If the service should be hidden, but "stable", I suggest generating random url as an alias,
